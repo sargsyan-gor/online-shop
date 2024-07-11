@@ -231,7 +231,7 @@
             width: 100%;
             max-width: 300px;
         }
-        .search-form button {
+        .search-form button, .enable{
             padding: 10px 20px;
             font-size: 16px;
             background-color: #007bff;
@@ -276,7 +276,7 @@
         </div>
         <div>
             <button type="submit" class="btn btn-primary">Search</button>
-            <a href="{{ route('index')  }}" class="btn btn-primary p-2">Enable Filters</a>
+            <a href="{{ route('index')  }}" class="btn btn-primary enable">Enable Filters</a>
         </div>
 
         @if(session('error'))
