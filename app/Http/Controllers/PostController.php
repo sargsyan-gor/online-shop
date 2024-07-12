@@ -33,7 +33,7 @@ class PostController extends Controller
         else {
 //            $posts = Post::paginate(3);
 
-            $posts = Post::all();
+            $posts = Post::paginate(6);
         }
         return view('posts.main', compact('posts'));
     }
