@@ -11,6 +11,10 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
+
+        if ($request->submit and is_null($request->filter) and is_null($request->filterByPrice) and is_null($request->filterByPriceMax)){
+            return redirect()->back()->with('error', 'you must filter posts by title, or by price.');
+        }
         $query = $request->input('filter');
         if (!$query){
             $request->validate([
