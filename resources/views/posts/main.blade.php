@@ -250,40 +250,74 @@
     </style>
 </head>
 <body>
+{{--<div class="search-form">--}}
+{{--    <h2>Search Posts ↓</h2>--}}
+{{--    <form action="{{ route('index') }}" method="get" class="{{ $errors->any() ? '' : 'd-none' }}">--}}
+{{--        @if(session('error'))--}}
+{{--            <p class="text-danger">--}}
+{{--                {{ session('error') }}--}}
+{{--            </p>--}}
+{{--        @endif--}}
+{{--        <div class="form-group">--}}
+{{--            <label for="query">Filter by title</label>--}}
+{{--            <input type="text" class="form-control" id="query" name="filter" value="{{ old('filter') }}" placeholder="Enter title">--}}
+{{--            @error('filter')--}}
+{{--            <p class="invalid-feedback">{{ $message }}</p>--}}
+{{--            @enderror--}}
+{{--        </div>--}}
+{{--        <div class="form-group">--}}
+{{--            <label for="minimum">Minimum price</label>--}}
+{{--            <input type="number" class="form-control @error('filterByPrice') is-invalid @enderror" id="minimum" name="filterByPrice" value="{{ old('filterByPrice') }}" placeholder="Minimum price">--}}
+{{--            @error('filterByPrice')--}}
+{{--            <p class="invalid-feedback">{{ $message }}</p>--}}
+{{--            @enderror--}}
+{{--        </div>--}}
+{{--        <div class="form-group">--}}
+{{--            <label for="maximum">Maximum price</label>--}}
+{{--            <input type="number" class="form-control form-control-lg @error('filterByPriceMax') is-invalid @enderror" id="maximum" name="filterByPriceMax" value="{{ old('filterByPriceMax') }}" placeholder="Maximum price">--}}
+{{--            @error('filterByPriceMax')--}}
+{{--            <p class="invalid-feedback">{{ $message }}</p>--}}
+{{--            @enderror--}}
+{{--        </div>--}}
+{{--        <div>--}}
+{{--            <button type="submit" class="btn btn-primary" value="Submit" name="submit">Search</button>--}}
+{{--            <a href="{{ route('index')  }}" class="btn btn-primary enable">Enable Filters</a>--}}
+{{--        </div>--}}
+
+
+{{--    </form>--}}
+{{--</div>--}}
 <div class="search-form">
     <h2>Search Posts ↓</h2>
-    <form action="{{ route('index') }}" method="get" class="{{ $errors->any() ? '' : 'd-none' }}">
+    <form action="{{ route('index') }}" method="get" class="{{ $errors->any() || session('error') ? '' : 'd-none' }}">
+        @if(session('error'))
+            <p class="text-danger">{{ session('error') }}</p>
+        @endif
         <div class="form-group">
             <label for="query">Filter by title</label>
             <input type="text" class="form-control" id="query" name="filter" value="{{ old('filter') }}" placeholder="Enter title">
             @error('filter')
-            <p class="invalid-feedback">{{ $message }}</p>
+            <p class="text-danger">{{ $message }}</p>
             @enderror
         </div>
         <div class="form-group">
             <label for="minimum">Minimum price</label>
             <input type="number" class="form-control @error('filterByPrice') is-invalid @enderror" id="minimum" name="filterByPrice" value="{{ old('filterByPrice') }}" placeholder="Minimum price">
             @error('filterByPrice')
-            <p class="invalid-feedback">{{ $message }}</p>
+            <p class="text-danger">{{ $message }}</p>
             @enderror
         </div>
         <div class="form-group">
             <label for="maximum">Maximum price</label>
-            <input type="number" class="form-control form-control-lg @error('filterByPriceMax') is-invalid @enderror" id="maximum" name="filterByPriceMax" value="{{ old('filterByPriceMax') }}" placeholder="Maximum price">
+            <input type="number" class="form-control @error('filterByPriceMax') is-invalid @enderror" id="maximum" name="filterByPriceMax" value="{{ old('filterByPriceMax') }}" placeholder="Maximum price">
             @error('filterByPriceMax')
-            <p class="invalid-feedback">{{ $message }}</p>
+            <p class="text-danger">{{ $message }}</p>
             @enderror
         </div>
         <div>
-            <button type="submit" class="btn btn-primary">Search</button>
-            <a href="{{ route('index')  }}" class="btn btn-primary enable">Enable Filters</a>
+            <button type="submit" class="btn btn-primary" name="submit" value="Submit">Search</button>
+            <a href="{{ route('index') }}" class="btn btn-primary enable">Enable Filters</a>
         </div>
-
-        @if(session('error'))
-            <p class="text-danger">
-                {{ session('error') }}
-            </p>
-        @endif
     </form>
 </div>
 <div class="container">
