@@ -11,29 +11,26 @@ class PostController extends Controller
 {
     public function index(Request $request)
     {
+        if ($request->submit && is_null($request->filter) && is_null($request->filterByPrice) && is_null($request->filterByPriceMax)){
+            return redirect()->back()->with('error', 'You must filter posts by title or by price.');
+        }
 
-        if ($request->submit and is_null($request->filter) and is_null($request->filterByPrice) and is_null($request->filterByPriceMax)){
-            return redirect()->back()->with('error', 'you must filter posts by title, or by price.');
-        }
         $query = $request->input('filter');
-        if (!$query){
-            $request->validate([
-                'filterByPrice' => 'required_with:filterByPriceMax|gt:0',
-                'filterByPriceMax' => 'required_with:filterByPrice|gt:0'
-            ]);
-        }
         $minimumPrice = $request->input('filterByPrice');
         $maximumPrice = $request->input('filterByPriceMax');
-        if ($query) {
-            $posts = Post::where('title', 'like', '%' . $query . '%')->get();
-        }
-        elseif ($minimumPrice AND $maximumPrice){
-            $posts = Post::whereBetween('price', [$minimumPrice, $maximumPrice])->get();
-        }
-        else {
-//            $posts = Post::paginate(3);
 
-            $posts = Post::paginate(6);
+        $postsQuery = Post::query();
+
+        if ($query) {
+            $postsQuery->where('title', 'like', '%' . $query . '%');
+        }
+
+        if ($minimumPrice && $maximumPrice) {
+            $postsQuery->whereBetween('price', [$minimumPrice, $maximumPrice]);
+        }
+        $posts = $postsQuery->paginate(3);
+        if ($request->input('page') > $posts->lastPage()) {
+            return redirect()->route('index', ['page' => $posts->lastPage()]);
         }
         return view('posts.main', compact('posts'));
     }
