@@ -94,8 +94,9 @@
             padding: 10px;
         }
         .pagination svg{
-            width: 10px;
-            padding: 10px;
+            width: 30px;
+            padding: 5px;
+            text-align: center;
         }
     </style>
 </head>
@@ -157,7 +158,7 @@
         @endif
     </div>
 
-    <div class="pagination">
+    <div class="pagination text-center">
         {{ $posts->links() }}
     </div>
 </div>
