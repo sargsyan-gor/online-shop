@@ -26,8 +26,8 @@ class PostController extends Controller
         }
         if (!$query){
             $request->validate([
-                'filterByPrice' => 'required_with:filterByPriceMax|integer',
-                'filterByPriceMax' => 'required_with:filterByPrice|integer'
+                'filterByPrice' => 'required_with:filterByPriceMax|integer|gt:1',
+                'filterByPriceMax' => 'required_with:filterByPrice|integer|gt:1'
             ]);
         }
         if ($minimumPrice && $maximumPrice) {
