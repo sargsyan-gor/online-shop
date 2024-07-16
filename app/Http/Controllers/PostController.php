@@ -24,7 +24,12 @@ class PostController extends Controller
         if ($query) {
             $postsQuery->where('title', 'like', '%' . $query . '%');
         }
-
+        if (!$query){
+            $request->validate([
+                'filterByPrice' => 'required_with:filterByPriceMax|integer',
+                'filterByPriceMax' => 'required_with:filterByPrice|integer'
+            ]);
+        }
         if ($minimumPrice && $maximumPrice) {
             $postsQuery->whereBetween('price', [$minimumPrice, $maximumPrice]);
         }
