@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
@@ -18,6 +19,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('posts/createPost', [PostController::class, 'postPage'])->name('postPage');
     Route::post('posts/createPost', [PostController::class, 'createPost'])->name('createPost');
     Route::get('posts/{post}/post', [PostController::class, 'aboutPost'])->name('about');
+    Route::get('posts/cart', [CartController::class, 'cartPage'])->name('cartPage');
+    Route::post('posts/{cart}/main', [CartController::class, 'storeCart'])->name('storeCart');
 });
 
 Route::group(['middleware' => ['auth','admin']], function (){

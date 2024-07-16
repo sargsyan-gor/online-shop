@@ -149,6 +149,12 @@
                                 <p class="card-text price">Price: ${{ $post->price }}</p>
                                 <a href="{{ route('about', $post) }}" class="text-decoration-none">Manage</a>
                             </div>
+                            <div>
+                                <form method="post" action="{{ route('storeCart', $post->id) }}">
+                                    @csrf
+                                    <button class="btn btn-primary btn-sm" type="submit">Add to cart</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

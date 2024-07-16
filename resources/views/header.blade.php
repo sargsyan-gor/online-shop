@@ -33,6 +33,7 @@
 
                 <li class="nav-item"><a href="{{ route('index') }}" class="nav-link active" aria-current="page">Welcome</a></li>
                 <li class="nav-item"><a href="{{ route('postPage') }}" class="nav-link">Add post</a></li>
+                <li class="nav-item"><a href="{{ route('cartPage') }}" class="nav-link">Cart</a></li>
                 @if(Gate::allows('isAdmin'))
                     <li class="nav-item"><a href="{{ route('adminPanel') }}" class="nav-link">Admin Panel</a></li>
                 @endif
