@@ -59,4 +59,9 @@ class User extends Authenticatable
     {
         return $this->roles()->where('name', 'Admin')->exists();
     }
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
 }

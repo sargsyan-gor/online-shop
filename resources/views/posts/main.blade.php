@@ -101,6 +101,9 @@
     </style>
 </head>
 <body>
+    @if(session('success'))
+        <p class="text-center text-success">{{ session('success')  }}</p>
+    @endif
 <div class="search-form">
     <h2>Search Posts ↓</h2>
     <form action="{{ route('index') }}" method="get" class="{{ $errors->any() || session('error') ? '' : 'd-none' }}">

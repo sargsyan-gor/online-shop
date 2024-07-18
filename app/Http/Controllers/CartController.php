@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Post;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
     public function cartPage()
     {
-        $carts = Auth::user()->card;
+        $carts = auth()->user()->cart;
         return view('posts/cart', compact('carts'));
     }
 
