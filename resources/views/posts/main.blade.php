@@ -133,7 +133,7 @@
             @enderror
         </div>
         <div>
-            <button type="submit" class="btn btn-primary" name="submit" value="Submit">Search</button>
+            <button type="submit" class="btn btn-primary">Search</button>
             <a href="{{ route('index') }}" class="btn btn-primary enable">Enable Filters</a>
         </div>
     </form>
