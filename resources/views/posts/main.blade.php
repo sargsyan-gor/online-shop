@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
             background-color: #f8f9fa;
             padding-top: 20px;
+            font-family: Arial, sans-serif;
         }
         .card {
             border: none;
@@ -43,14 +45,12 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        input{
-            width: 800px!important;
-        }
         .search-form h2 {
             margin-bottom: 20px;
             font-size: 24px;
             color: #333333;
             text-align: center;
+            cursor: pointer;
         }
         .search-form form {
             display: flex;
@@ -71,7 +71,7 @@
             width: 100%;
             max-width: 300px;
         }
-        .search-form button, .enable{
+        .search-form button, .enable {
             padding: 10px 20px;
             font-size: 16px;
             background-color: #007bff;
@@ -93,17 +93,18 @@
             justify-content: center;
             padding: 10px;
         }
-        .pagination svg{
-            width: 30px;
-            padding: 5px;
-            text-align: center;
+        .pagination p{
+            padding-top: 10px;
+        }
+        .pagination .hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between {
+            display: none;
         }
     </style>
 </head>
 <body>
-    @if(session('success'))
-        <p class="text-center text-success">{{ session('success')  }}</p>
-    @endif
+@if(session('success'))
+    <p class="text-center text-success">{{ session('success') }}</p>
+@endif
 <div class="search-form">
     <h2>Search Posts ↓</h2>
     <form action="{{ route('index') }}" method="get" class="{{ $errors->any() || session('error') ? '' : 'd-none' }}">
@@ -152,22 +153,22 @@
                             @else
                                 <p>No name.</p>
                             @endif
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between align-items-center">
                                 <p class="card-text price">Price: ${{ $post->price }}</p>
                                 <a href="{{ route('about', $post) }}" class="text-decoration-none">Manage</a>
                             </div>
-                            <div>
-                                <form method="post" action="{{ route('storeCart', $post->id) }}">
-                                    @csrf
-                                    <button class="btn btn-primary btn-sm" type="submit">Add to cart</button>
-                                </form>
-                            </div>
+                            <form method="post" action="{{ route('storeCart', $post->id) }}">
+                                @csrf
+                                <button class="btn btn-primary btn-sm mt-2" type="submit">Add to cart</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-            @endforeach
-        @else
-            <p>No posts found.</p>
+        @endforeach
+      @else
+            <div class="col-12">
+                <p class="text-center">No posts found.</p>
+            </div>
         @endif
     </div>
 
@@ -175,6 +176,7 @@
         {{ $posts->links() }}
     </div>
 </div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
