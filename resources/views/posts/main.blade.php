@@ -147,7 +147,11 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $post->title }}</h5>
                             <p class="card-text">{{ $post->content }}</p>
-                            <p class="card-text">Added by <strong>{{ $post->user->name }}</strong></p>
+                            @if(isset($post->user->name))
+                                <p class="card-text">Added by <strong>{{ $post->user->name }}</strong></p>
+                            @else
+                                <p>No name.</p>
+                            @endif
                             <div class="d-flex justify-content-between">
                                 <p class="card-text price">Price: ${{ $post->price }}</p>
                                 <a href="{{ route('about', $post) }}" class="text-decoration-none">Manage</a>
